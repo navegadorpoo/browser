@@ -28,6 +28,7 @@ public class GraphicInterface extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.BorderLayout(2, 0));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
