@@ -27,8 +27,42 @@ public class GraphicInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MenuPanel = new javax.swing.JPanel();
+        PagePanel = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.BorderLayout(2, 0));
+
+        MenuPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        MenuPanel.setPreferredSize(new java.awt.Dimension(400, 80));
+
+        javax.swing.GroupLayout MenuPanelLayout = new javax.swing.GroupLayout(MenuPanel);
+        MenuPanel.setLayout(MenuPanelLayout);
+        MenuPanelLayout.setHorizontalGroup(
+            MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 396, Short.MAX_VALUE)
+        );
+        MenuPanelLayout.setVerticalGroup(
+            MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 76, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(MenuPanel, java.awt.BorderLayout.PAGE_START);
+
+        PagePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        javax.swing.GroupLayout PagePanelLayout = new javax.swing.GroupLayout(PagePanel);
+        PagePanel.setLayout(PagePanelLayout);
+        PagePanelLayout.setHorizontalGroup(
+            PagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 396, Short.MAX_VALUE)
+        );
+        PagePanelLayout.setVerticalGroup(
+            PagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 216, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(PagePanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -69,5 +103,7 @@ public class GraphicInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel MenuPanel;
+    private javax.swing.JPanel PagePanel;
     // End of variables declaration//GEN-END:variables
 }
