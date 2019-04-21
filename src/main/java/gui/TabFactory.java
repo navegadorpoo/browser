@@ -1,7 +1,7 @@
-package caju.browser.gui;
+package gui;
 
-import caju.browser.gui.forms.MenuPanel;
-import caju.browser.gui.forms.PagePanel;
+import gui.forms.MenuPanel;
+import gui.forms.PagePanel;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 

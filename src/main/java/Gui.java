@@ -1,6 +1,4 @@
-package caju.browser;
-
-import caju.browser.gui.TabFactory;
+import gui.TabFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;

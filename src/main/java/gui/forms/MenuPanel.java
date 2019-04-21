@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package caju.browser.gui.forms;
+package gui.forms;
 
 /**
  *
@@ -32,6 +32,7 @@ public class MenuPanel extends javax.swing.JPanel {
         next = new javax.swing.JButton();
         go = new javax.swing.JButton();
         login = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         back.setText("<");
 
@@ -40,6 +41,8 @@ public class MenuPanel extends javax.swing.JPanel {
         go.setText("Ir");
 
         login.setText("Login");
+
+        jButton1.setText("...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -50,11 +53,13 @@ public class MenuPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(urlBar, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                .addComponent(urlBar, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(go, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(login))
+                .addComponent(login)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -65,7 +70,8 @@ public class MenuPanel extends javax.swing.JPanel {
                     .addComponent(back)
                     .addComponent(next)
                     .addComponent(login)
-                    .addComponent(go))
+                    .addComponent(go)
+                    .addComponent(jButton1))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -74,6 +80,7 @@ public class MenuPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JButton go;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton login;
     private javax.swing.JButton next;
     private javax.swing.JTextField urlBar;
