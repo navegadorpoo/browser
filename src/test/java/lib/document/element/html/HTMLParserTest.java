@@ -7,26 +7,29 @@ package lib.document.element.html;
  */
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import junit.framework.TestCase;
 import lib.FileManager;
+import lib.URLReader;
 import lib.document.Document;
+import org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 /**
  *
  * @author richard
  */
-public class HTMLParserTest {
+public class HTMLParserTest extends TestCase {
     
     private String html;
     
     public HTMLParserTest() {
-        FileManager fileManager = new FileManager(new File("src/test/resources/arquivo.html"));
-        fileManager.prepare();
-        String line;
-        while ((line = fileManager.readLine()) != null) {
-            html += line;
-        }
-        this.html = html;
+        URLReader url = new URLReader("https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal");
+        html = url.read();
+        
+//      FileManager fileManager = new FileManager(new File("src/test/resources/wiki.html"));
+//      html = fileManager.prepare().readWholeFile();
     }
 
     @Test

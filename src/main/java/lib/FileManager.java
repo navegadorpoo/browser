@@ -53,4 +53,12 @@ public class FileManager {
         }
         return null;
     }
+    
+    public String readWholeFile() {
+        String line;
+        while ((line = readLine()) != null) {
+            text += line;
+        }
+        return text;
+    }
 }
