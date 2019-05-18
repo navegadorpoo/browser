@@ -5,6 +5,15 @@
  */
 package gui.forms;
 
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import lib.URLReader;
+import lib.URLValidator;
+import lib.document.Document;
+import lib.document.element.html.HTMLParser;
+
 /**
  *
  * @author richard
@@ -35,11 +44,22 @@ public class MenuPanel extends javax.swing.JPanel {
         more = new javax.swing.JButton();
         reload = new javax.swing.JButton();
 
+        urlBar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                urlBarOnEnter(evt);
+            }
+        });
+
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/left_arrow.png"))); // NOI18N
 
         next.setIcon(new javax.swing.ImageIcon(getClass().getResource("/right_arrow.png"))); // NOI18N
 
         go.setIcon(new javax.swing.ImageIcon(getClass().getResource("/go.png"))); // NOI18N
+        go.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goActionPerformed(evt);
+            }
+        });
 
         login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
 
@@ -82,6 +102,47 @@ public class MenuPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goActionPerformed
+        runHttpRequest(urlBar.getText().toLowerCase());
+    }//GEN-LAST:event_goActionPerformed
+
+    private void urlBarOnEnter(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_urlBarOnEnter
+        if (evt.getKeyCode() != 10) {
+           return;
+        }
+        runHttpRequest(urlBar.getText().toLowerCase());
+    }//GEN-LAST:event_urlBarOnEnter
+
+    private void runHttpRequest(String url) {     
+        if (!URLValidator.validate(url)) {
+            return;
+        }
+        
+        URLReader urlReader = new URLReader(url);
+        String html = urlReader.read();
+        
+        HTMLParser parser = new HTMLParser();
+        parser.parse(html);
+        
+        Document document = parser.getDocument();
+        
+        PagePanel page = (PagePanel) getParent().getComponent(1);
+        
+        
+        JScrollPane jScrollPane = new javax.swing.JScrollPane();
+        JTextArea jTextArea = new javax.swing.JTextArea(html);
+        jTextArea.setColumns(20);
+        jTextArea.setRows(5);
+        jScrollPane.setViewportView(jTextArea);
+        
+        page.add(jScrollPane, BorderLayout.CENTER);
+        page.add(new MenuPanel(), BorderLayout.PAGE_START);
+        
+        page.revalidate();
+        page.repaint();
+        
+        System.out.println("oi");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
