@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
 import lib.URLReader;
 import lib.URLValidator;
 import lib.document.Document;
@@ -36,13 +37,33 @@ public class MenuPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        configPopupMenu = new javax.swing.JPopupMenu();
+        bookmark = new javax.swing.JMenuItem();
+        history = new javax.swing.JMenuItem();
         urlBar = new javax.swing.JTextField();
         back = new javax.swing.JButton();
         next = new javax.swing.JButton();
         go = new javax.swing.JButton();
         login = new javax.swing.JButton();
-        more = new javax.swing.JButton();
+        config = new javax.swing.JButton();
         reload = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+
+        bookmark.setText("Favoritos");
+        bookmark.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookmarkActionPerformed(evt);
+            }
+        });
+        configPopupMenu.add(bookmark);
+
+        history.setText("Histórico");
+        history.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historyActionPerformed(evt);
+            }
+        });
+        configPopupMenu.add(history);
 
         urlBar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -63,9 +84,16 @@ public class MenuPanel extends javax.swing.JPanel {
 
         login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
 
-        more.setIcon(new javax.swing.ImageIcon(getClass().getResource("/settings.png"))); // NOI18N
+        config.setIcon(new javax.swing.ImageIcon(getClass().getResource("/settings.png"))); // NOI18N
+        config.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configActionPerformed(evt);
+            }
+        });
 
         reload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reload.png"))); // NOI18N
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/star.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -78,26 +106,30 @@ public class MenuPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reload, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(urlBar, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                .addComponent(urlBar, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(go, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(more, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(config, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(urlBar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(back)
-                    .addComponent(next)
-                    .addComponent(login)
-                    .addComponent(go)
-                    .addComponent(more)
-                    .addComponent(reload))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(urlBar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(back)
+                        .addComponent(next)
+                        .addComponent(login)
+                        .addComponent(go)
+                        .addComponent(config)
+                        .addComponent(reload)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -112,6 +144,23 @@ public class MenuPanel extends javax.swing.JPanel {
         }
         runHttpRequest(urlBar.getText().toLowerCase());
     }//GEN-LAST:event_urlBarOnEnter
+
+    private void configActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configActionPerformed
+        configPopupMenu.show(this, config.getX() + config.getWidth() - configPopupMenu.getWidth(),
+                config.getY() + config.getHeight());
+    }//GEN-LAST:event_configActionPerformed
+
+    private void bookmarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookmarkActionPerformed
+        BookmarkModal book = new BookmarkModal();
+        book.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        book.setVisible(true);
+    }//GEN-LAST:event_bookmarkActionPerformed
+
+    private void historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyActionPerformed
+        HistoryModal history = new HistoryModal();
+        history.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        history.setVisible(true);
+    }//GEN-LAST:event_historyActionPerformed
 
     private void runHttpRequest(String url) {     
         if (!URLValidator.validate(url)) {
@@ -146,9 +195,13 @@ public class MenuPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
+    private javax.swing.JMenuItem bookmark;
+    private javax.swing.JButton config;
+    private javax.swing.JPopupMenu configPopupMenu;
     private javax.swing.JButton go;
+    private javax.swing.JMenuItem history;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton login;
-    private javax.swing.JButton more;
     private javax.swing.JButton next;
     private javax.swing.JButton reload;
     private javax.swing.JTextField urlBar;
