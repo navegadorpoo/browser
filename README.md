@@ -1,2 +1,2 @@
 # browser
-Navegador criado em java
+Navegador para fins educacionais criado em java
