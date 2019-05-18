@@ -29,6 +29,10 @@ public class Gui extends JFrame {
         tabPane.addTab("microsoft", TabFactory.makeTab());
         tabPane.addTab("google", TabFactory.makeTab());
         tabPane.addTab("facebook", TabFactory.makeTab());
+        tabPane.addTab("facebook", TabFactory.makeTab());
+        tabPane.addTab("facebook", TabFactory.makeTab());
+        tabPane.addTab("facebook", TabFactory.makeTab());
+        tabPane.addTab("facebook", TabFactory.makeTab());
 
         pack();
     }
