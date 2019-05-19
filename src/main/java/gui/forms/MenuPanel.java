@@ -5,11 +5,11 @@
  */
 package gui.forms;
 
+import gui.forms.modal.BookmarkModal;
+import gui.forms.modal.HistoryModal;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.WindowConstants;
 import lib.URLReader;
 import lib.URLValidator;
 import lib.document.Document;
@@ -122,13 +122,13 @@ public class MenuPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
+                    .addComponent(login)
+                    .addComponent(go)
+                    .addComponent(config)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(urlBar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(back)
                         .addComponent(next)
-                        .addComponent(login)
-                        .addComponent(go)
-                        .addComponent(config)
                         .addComponent(reload)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -146,20 +146,23 @@ public class MenuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_urlBarOnEnter
 
     private void configActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configActionPerformed
-        configPopupMenu.show(this, config.getX() + config.getWidth() - configPopupMenu.getWidth(),
-                config.getY() + config.getHeight());
+        int posX = config.getX() + config.getWidth() - configPopupMenu.getWidth();
+        int posY = config.getY() + config.getHeight();
+        configPopupMenu.show(this, posX, posY);
     }//GEN-LAST:event_configActionPerformed
 
     private void bookmarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookmarkActionPerformed
-        BookmarkModal book = new BookmarkModal();
-        book.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        book.setVisible(true);
+        BookmarkModal bookModal = new BookmarkModal();
+        bookModal.addRow("google", "www.google.com");
+        bookModal.addRow("facebook", "www.facebook.com");
+        bookModal.show();
     }//GEN-LAST:event_bookmarkActionPerformed
 
     private void historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyActionPerformed
-        HistoryModal history = new HistoryModal();
-        history.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        history.setVisible(true);
+        HistoryModal historyModal = new HistoryModal();
+        historyModal.addRow("google", "www.google.com");
+        historyModal.addRow("facebook", "www.facebook.com");
+        historyModal.show();
     }//GEN-LAST:event_historyActionPerformed
 
     private void runHttpRequest(String url) {     
