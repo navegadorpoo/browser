@@ -19,19 +19,21 @@ import lib.util.Coalesce;
  */
 public class HTMLParser implements Parser {
     
-    private static final String TAG_REGEX = "<\\s*(?<tag>[a-z1-6]+)\\s*(?<att>[^>]*)>(?<content>.*?)<\\s*/\\s*\\1\\s*>|<\\s*(?<monotag>[a-z1-6]+)\\s*(?<monoatt>[^>]*)/?>";
+    private static final String TAG_REGEX = "<\\s*(?<tag>[a-z1-6]+)\\s*(?<att>[^>]*)>(?<content>.*?)<\\s*/\\s*\\1\\s*>|<\\s*(?<monotag>[a-z1-6]+)\\s*(?<monoatt>[^>]*)/?>|(?<text>[^<>]++(?!>))";
     private static final String ATTRIB_REGEX = "(?<attribute>[a-z]+)\\s*=\\s*\"(?<value>.*?)\"";
     
     private Document document;
-    private Node lastParent;
 
     public HTMLParser() {
         document = new Document();
-        lastParent = document;
     }
 
     @Override
     public void parse(String html) {
+        parseHTML(html, document);
+    }
+    
+    private void parseHTML(String html, Node parent) {
         if (html == null) {
             return;
         }
@@ -39,29 +41,53 @@ public class HTMLParser implements Parser {
         Matcher m = Pattern.compile(HTMLParser.TAG_REGEX, Pattern.CASE_INSENSITIVE).matcher(html);
         
         while (m.find()) {
-            String tag = Coalesce.get(m.group("tag"), m.group("monotag"));
-            Node node = Document.createElement(tag);
+            Node node = createChildNode(m, parent);
             
             if (node == null) {
                 continue;
             }
-                 
-            String att = Coalesce.get(m.group("att"), m.group("monoatt"));
-            Matcher ma = Pattern.compile(HTMLParser.ATTRIB_REGEX, Pattern.CASE_INSENSITIVE)
-                                .matcher(att);
             
-            while (ma.find()) {
-                ((Element)node).addAttribute(ma.group("attribute"), ma.group("value"));
-            }
-            
-            lastParent.appendChild(node);
-            Node tmpParent = lastParent;
-            lastParent = node;
-            parse(m.group("content"));
-            lastParent = tmpParent;
+            parseHTML(m.group("content"), node);
         }
-        if (html.matches("[^<>]+")) {
-            lastParent.appendChild(Document.createCharacterNode("text", html));
+    }
+    
+    private Node createChildNode(Matcher m, Node parent) {
+        String text = m.group("text");
+        if (text != null) {
+            createTextNode(parent, text);
+            return null;
+        }
+        
+        return createElementNode(m, parent);
+    }
+    
+    private void createTextNode(Node parent, String text) {
+        if (!text.matches("^\\s*$")) {
+            parent.appendChild(Document.createCharacterNode("text", text));
+        }
+    }
+    
+    private Node createElementNode(Matcher m, Node parent) {
+        String tag = Coalesce.get(m.group("tag"), m.group("monotag"));
+        Node node = Document.createElement(tag);
+
+        if (node == null) {
+            return null;
+        }
+
+        insertAttributes(m, node);
+        parent.appendChild(node);
+        
+        return node;
+    }
+    
+    private void insertAttributes(Matcher m, Node node) {
+        String att = Coalesce.get(m.group("att"), m.group("monoatt"));
+        Matcher ma = Pattern.compile(HTMLParser.ATTRIB_REGEX, Pattern.CASE_INSENSITIVE)
+                            .matcher(att);
+
+        while (ma.find()) {
+            ((Element)node).addAttribute(ma.group("attribute"), ma.group("value"));
         }
     }
     
