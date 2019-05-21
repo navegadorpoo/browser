@@ -28,7 +28,7 @@ public class HTMLParserTest extends TestCase {
         URLReader url = new URLReader("https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal");
         html = url.read();
         
-//      FileManager fileManager = new FileManager(new File("src/test/resources/wiki.html"));
+//      FileManager fileManager = new FileManager(new File("src/test/resources/texto.html"));
 //      html = fileManager.prepare().readWholeFile();
     }
 
