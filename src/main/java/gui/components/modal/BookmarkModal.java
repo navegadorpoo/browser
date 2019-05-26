@@ -1,4 +1,4 @@
-package gui.forms.modal;
+package gui.components.modal;
 
 public class BookmarkModal extends AbstractModal {
     public BookmarkModal() {

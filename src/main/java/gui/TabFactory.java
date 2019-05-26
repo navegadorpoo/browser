@@ -1,7 +1,7 @@
 package gui;
 
-import gui.forms.MenuPanel;
-import gui.forms.PagePanel;
+import gui.components.menu.Menu;
+import gui.components.page.Page;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
@@ -13,8 +13,8 @@ public class TabFactory {
         
         mainPanel.setLayout(new BorderLayout());
         
-        mainPanel.add(new MenuPanel(), BorderLayout.PAGE_START);
-        mainPanel.add(new PagePanel(), BorderLayout.CENTER);
+        mainPanel.add(new Menu(), BorderLayout.PAGE_START);
+        mainPanel.add(new Page(), BorderLayout.CENTER);
         
         return mainPanel;
     }
