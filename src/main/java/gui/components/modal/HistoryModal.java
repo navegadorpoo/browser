@@ -1,4 +1,4 @@
-package gui.forms.modal;
+package gui.components.modal;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -12,7 +12,7 @@ public class HistoryModal extends AbstractModal {
     
     public void addRow(String name, String url) {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy hh:mm:ss", new Locale("pt", "BR"));
+        SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss", new Locale("pt", "BR"));
         model.addRow(new Object[] {name, url, df.format(calendar.getTime()), "Lixeira"});
     }
 }
