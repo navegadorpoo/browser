@@ -1,12 +1,15 @@
 package lib.browser;
 
-import gui.TabFactory;
+import gui.WindowPanel;
 import javax.swing.JPanel;
+import lib.URLReader;
 import lib.document.Document;
+import lib.document.element.html.HTMLParser;
+import lib.document.element.html.HTMLRenderer;
 
 public class Window {
     private String title;
-    private JPanel panel = TabFactory.makeTab();
+    private WindowPanel panel = new WindowPanel();
     private Document document;
     private History history = new History();
     private BookmarkList bookmarks = new BookmarkList();
@@ -33,6 +36,21 @@ public class Window {
         bookmarks.add(new Bookmark("Facebook", new Location("Facebook", "http://www.facebook.com")));
         bookmarks.add(new Bookmark("Google", new Location("Google", "http://www.google.com")));
         bookmarks.add(new Bookmark("Facebook", new Location("Facebook", "http://www.facebook.com")));
+    }
+    
+    public void open(String url) {
+        URLReader urlReader = new URLReader(url);
+        String html = urlReader.read();
+        HTMLParser parser = new HTMLParser();
+        parser.parse(html);
+        document = parser.getDocument();
+        location = new Location("titulo", url);
+        render();
+    }
+    
+    public void render() {
+        HTMLRenderer renderer = new HTMLRenderer(panel.getPage());
+        renderer.render(document);
     }
 
     public Document getDocument() {
@@ -77,6 +95,7 @@ public class Window {
 
     public void setTitle(String title) {
         this.title = title;
+        Browser.getInstance().changeActiveTabName(title);
     }
     
 }

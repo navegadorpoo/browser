@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 import lib.browser.Browser;
 import lib.browser.Window;
 
-public class NewTabButton extends ImageButton {
+public class CloseTabButton extends ImageButton {
     
-    public NewTabButton() {
-        super("sum");
+    public CloseTabButton() {
+        super("close");
         setEvents();
     }
     
@@ -16,7 +16,7 @@ public class NewTabButton extends ImageButton {
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                Browser.getInstance().addWindow(new Window("Sem Título"));
+                Browser.getInstance().closeWindow();
             }
         });
     }

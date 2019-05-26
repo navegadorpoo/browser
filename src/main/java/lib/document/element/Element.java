@@ -1,11 +1,12 @@
 package lib.document.element;
 
 import java.util.LinkedList;
-import lib.interfaces.Renderable;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lib.document.node.Node;
 import lib.document.node.NodeType;
 
-abstract public class Element extends Node implements Renderable {
+abstract public class Element extends Node {
 
     private LinkedList<Attribute> attributes;
     
@@ -20,5 +21,12 @@ abstract public class Element extends Node implements Renderable {
 
     public void addAttribute(String name, String value) {
         this.attributes.add(new Attribute(name, value));
+    }
+    
+    public String getAttribute(String name) {
+        Stream<Attribute> attrs = attributes.stream();
+        Attribute attr = attrs.filter(att -> att.getName().equals(name))
+                .findAny().orElse(null);
+        return attr != null ? attr.getValue() : "";
     }
 }

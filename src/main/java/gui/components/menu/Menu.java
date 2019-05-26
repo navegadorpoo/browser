@@ -18,6 +18,7 @@ public class Menu extends JPanel {
     BookmarkButton bookmarkButton = new BookmarkButton();
     LoginButton    loginButton    = new LoginButton();
     NewTabButton   newTabButton   = new NewTabButton();
+    CloseTabButton closeTabButton = new CloseTabButton();
     SettingsButton settingsButton = new SettingsButton();
 
     public Menu() {
@@ -26,11 +27,12 @@ public class Menu extends JPanel {
         add(nextButton, getGridConstraints(0, 1));
         add(reloadButton, getGridConstraints(0, 2));
         add(newTabButton, getGridConstraints(0, 3));
-        add(urlBar, getGridConstraints(1, 4));
-        add(goButton, getGridConstraints(0, 5));
-        add(bookmarkButton, getGridConstraints(0, 5));
-        add(loginButton, getGridConstraints(0, 6));
-        add(settingsButton, getGridConstraints(0, 7));
+        add(closeTabButton, getGridConstraints(0, 4));
+        add(urlBar, getGridConstraints(1, 5));
+        add(goButton, getGridConstraints(0, 6));
+        add(bookmarkButton, getGridConstraints(0, 7));
+        add(loginButton, getGridConstraints(0, 8));
+        add(settingsButton, getGridConstraints(0, 9));
     }
     
     private GridBagConstraints getGridConstraints(int weightx, int gridx) {

@@ -13,7 +13,7 @@ public class URLReader {
 
     public URLReader(String url) {
         try {
-            this.url = new URL(url);
+            this.url = new URL(UrlComplete.complete(url));
         } catch (MalformedURLException e) {
             //do something
         }

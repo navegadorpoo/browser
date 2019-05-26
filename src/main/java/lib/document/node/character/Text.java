@@ -1,6 +1,7 @@
 package lib.document.node.character;
 
-import lib.document.node.Node;
+import gui.components.page.Page;
+import javax.swing.JTextArea;
 import lib.document.node.NodeType;
 
 public class Text extends CharacterData {
@@ -10,8 +11,9 @@ public class Text extends CharacterData {
     }
 
     @Override
-    public void render() {
-        
+    public void render(Page page) {
+        page.add(new JTextArea(textContent));
+        page.revalidate();
     }
     
 }
