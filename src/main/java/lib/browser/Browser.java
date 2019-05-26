@@ -25,21 +25,33 @@ public class Browser {
         return instance;
     }
     
+    public void changeActiveTabName(String name) {
+        graphicInterface.getTabPane().getSelectedComponent().setName(name);
+        graphicInterface.revalidate();
+    }
+    
     public Window getWindow() {
         return windows.get(graphicInterface.getTabPane().getSelectedIndex());
     }
         
-    public void add(Window window) {
+    public void addWindow(Window window) {
         graphicInterface.add(window.getTitle(), window.getPanel());
         windows.add(window);
         JTabbedPane pane = graphicInterface.getTabPane();
         pane.setSelectedIndex(pane.getComponentCount() - 1);
     }
+    
+    public void closeWindow() {
+        JTabbedPane pane = graphicInterface.getTabPane();
+        if (pane.getComponentCount() > 1) {
+            pane.remove(pane.getSelectedComponent());
+        }
+    }
        
     public static void main(String args[]) {
         setLookAndFeel();
         Browser browser = Browser.getInstance();
-        browser.add(new Window("Página Inicial"));
+        browser.addWindow(new Window("Página Inicial"));
     }
     
     public static void setLookAndFeel() {
