@@ -3,10 +3,7 @@ package gui.components.menu;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JTextField;
-import lib.URLReader;
 import lib.browser.Browser;
-import lib.browser.Window;
-import lib.document.element.html.HTMLParser;
 
 public class UrlBar extends JTextField {
     public UrlBar() {
@@ -14,7 +11,6 @@ public class UrlBar extends JTextField {
     }
     
     private void setEvents() {
-        JTextField self = this;
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent evt) {
@@ -26,7 +22,7 @@ public class UrlBar extends JTextField {
                 if (evt.getKeyCode() != 10) {
                     return;
                 }
-                Browser.getInstance().getWindow().open(self.getText());
+                Browser.getInstance().getWindow().open(getText());
             }
 
             @Override

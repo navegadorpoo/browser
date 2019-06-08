@@ -2,7 +2,6 @@ package lib.document.node;
 
 import gui.components.page.Page;
 import java.util.LinkedList;
-import javax.swing.JTextArea;
 import lib.interfaces.Renderable;
 
 abstract public class Node implements Renderable {
