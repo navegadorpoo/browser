@@ -1,16 +1,17 @@
 package lib.browser;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import lib.date.DateFormat;
 
 public class Location {
     private String title;
     private String href;
-    private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    private LocalDateTime datetime;
 
-    public Location(String title, String href) {
+    public Location(String title, String href, LocalDateTime datetime) {
         this.title = title;
         this.href = href;
+        this.datetime = datetime;
     }
     
     public String getUrl() {
@@ -21,8 +22,11 @@ public class Location {
         return title;
     }
     
-    public String getDateTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/YYYY H:m:i");
-        return sdf.format(timestamp);
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    public String getDateToShow() {
+        return datetime.format(DateFormat.getBrazilianFormatter());
     }
 }

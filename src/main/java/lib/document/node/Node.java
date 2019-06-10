@@ -2,7 +2,6 @@ package lib.document.node;
 
 import gui.components.page.Page;
 import java.util.LinkedList;
-import javax.swing.JTextArea;
 import lib.interfaces.Renderable;
 
 abstract public class Node implements Renderable {
@@ -22,6 +21,10 @@ abstract public class Node implements Renderable {
         children.add(node);
     }
     
+    public int countChildren() {
+        return children.size();
+    }
+    
     public Node getChild(int index) {
         return children.get(index);
     }
@@ -32,8 +35,6 @@ abstract public class Node implements Renderable {
    
     @Override
     public void render(Page page) {
-//        page.add(new JTextArea(this.getClass().toString()));
-//        page.revalidate();
         for (Node child : children) {
             child.render(page);
         }

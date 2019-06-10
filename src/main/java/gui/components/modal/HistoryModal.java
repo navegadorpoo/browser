@@ -1,18 +1,12 @@
 package gui.components.modal;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-import javax.swing.JButton;
-
 public class HistoryModal extends AbstractModal {
     public HistoryModal() {
-        super(new String[] {"Nome", "Endereço", "Data de Acesso", "Remover"});
+        super(new String[] {"ID", "Nome", "Endereço", "Data de Acesso", "Remover"});
+        table.setName("history");
     }
     
-    public void addRow(String name, String url) {
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss", new Locale("pt", "BR"));
-        model.addRow(new Object[] {name, url, df.format(calendar.getTime()), "Lixeira"});
+    public void addRow(int id, String name, String url, String datetime) {
+        model.addRow(new Object[] {id, name, url, datetime, "Lixeira"});
     }
 }

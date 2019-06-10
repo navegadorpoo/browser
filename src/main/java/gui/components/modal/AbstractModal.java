@@ -1,7 +1,7 @@
 package gui.components.modal;
 
 import gui.ResponsiveDimension;
-import gui.components.listener.MouseDeleteTableRowListener;
+import gui.components.listener.ModelDeleteListener;
 import gui.components.menu.button.imagebutton.DeleteButton;
 
 import javax.swing.JFrame;
@@ -12,10 +12,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 abstract public class AbstractModal extends JFrame {
-    DefaultTableModel model;
-    JScrollPane scrollPane = new JScrollPane();
-    JTable table = new JTable();
-    String[] columns;
+    protected DefaultTableModel model;
+    protected JScrollPane scrollPane = new JScrollPane();
+    protected JTable table = new JTable();
+    protected String[] columns;
 
     public AbstractModal(String[] columns) {
         this.columns = columns;
@@ -37,9 +37,13 @@ abstract public class AbstractModal extends JFrame {
         table.setModel(model);
         table.setRowSelectionAllowed(false);
         table.setRowHeight(30);
-        table.addMouseListener(new MouseDeleteTableRowListener());
+        table.addMouseListener(new ModelDeleteListener());
         
-        TableColumn column = table.getColumnModel().getColumn(model.getColumnCount() - 1);
+        // remove id column
+        table.removeColumn(table.getColumnModel().getColumn(0));
+        
+        // style remove column
+        TableColumn column = table.getColumnModel().getColumn(model.getColumnCount() - 2);
         column.setMaxWidth(70);
         column.setCellRenderer(new DeleteButton());
         

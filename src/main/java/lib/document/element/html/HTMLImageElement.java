@@ -1,6 +1,6 @@
 package lib.document.element.html;
 
-import lib.UrlComplete;
+import lib.net.UrlComplete;
 import gui.components.page.Page;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -14,11 +14,7 @@ public class HTMLImageElement extends HTMLElement {
     @Override
     public void render(Page page) {
         String urlBase  = Browser.getInstance().getWindow().getLocation().getUrl();
-        urlBase = UrlComplete.complete(urlBase);
-        
         String urlImage = urlBase + getAttribute("src");
-        
-        System.out.println(urlImage);
         
         try {
             BufferedImage image = ImageIO.read(new URL(urlImage));

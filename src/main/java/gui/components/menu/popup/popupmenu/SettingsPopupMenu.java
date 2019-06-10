@@ -9,6 +9,7 @@ import lib.browser.Bookmark;
 import lib.browser.BookmarkList;
 import lib.browser.Browser;
 import lib.browser.History;
+import lib.browser.HistoryList;
 import lib.browser.Location;
 
 public class SettingsPopupMenu extends PopupMenu {
@@ -26,8 +27,9 @@ public class SettingsPopupMenu extends PopupMenu {
             public void actionPerformed(ActionEvent evt) {
                 BookmarkModal bookmarkModal = new BookmarkModal();
                 BookmarkList bookmarkList = Browser.getInstance().getWindow().getBookmarkList();
-                for (Object bookmark : bookmarkList) {
-                    bookmarkModal.addRow(((Bookmark)bookmark).getName(), ((Bookmark)bookmark).getLocation().getUrl());
+                for (Object object : bookmarkList) {
+                    Bookmark b = (Bookmark) object;
+                    bookmarkModal.addRow(b.getId(), b.getName(), b.getLocation().getUrl());
                 }
                 bookmarkModal.show();
             }
@@ -36,9 +38,11 @@ public class SettingsPopupMenu extends PopupMenu {
         historyPopupItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 HistoryModal historyModal = new HistoryModal();
-                History history = Browser.getInstance().getWindow().getHistory();
-                for (Object location : history) {
-                    historyModal.addRow(((Location)location).getTitle(), ((Location)location).getUrl());
+                HistoryList history = Browser.getInstance().getWindow().getHistory();
+                for (Object object : history) {
+                    History h = (History) object;
+                    Location l = h.getLocation();
+                    historyModal.addRow(h.getId(), l.getTitle(), l.getUrl(), l.getDateToShow());
                 }
                 historyModal.show();
             }

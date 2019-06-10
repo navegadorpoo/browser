@@ -13,6 +13,7 @@ public class Browser {
         
     private GraphicInterface graphicInterface = new GraphicInterface();
     private LinkedList<Window> windows = new LinkedList<>();
+    private int user = 1;
     
     private Browser () {
         graphicInterface.setVisible(true);
@@ -25,9 +26,9 @@ public class Browser {
         return instance;
     }
     
-    public void changeActiveTabName(String name) {
-        graphicInterface.getTabPane().getSelectedComponent().setName(name);
-        graphicInterface.revalidate();
+    public void changeSelectedTabTitle(String title) {
+        JTabbedPane tab = graphicInterface.getTabPane();
+        tab.setTitleAt(tab.getSelectedIndex(), title);
     }
     
     public Window getWindow() {
@@ -46,6 +47,10 @@ public class Browser {
         if (pane.getComponentCount() > 1) {
             pane.remove(pane.getSelectedComponent());
         }
+    }
+    
+    public int getUser() {
+        return user;
     }
        
     public static void main(String args[]) {

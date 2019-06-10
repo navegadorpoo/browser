@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lib.document.element.html;
 
 import java.util.regex.Matcher;
@@ -13,10 +8,6 @@ import lib.document.node.Node;
 import lib.interfaces.Parser;
 import lib.util.Coalesce;
 
-/**
- *
- * @author richard
- */
 public class HTMLParser implements Parser {
     
     private static final String TAG_REGEX = "<\\s*(?<tag>[a-z1-6]+)\\s*(?<att>[^>]*)>(?<content>.*?)<\\s*/\\s*\\1\\s*>|<\\s*(?<monotag>[a-z1-6]+)\\s*(?<monoatt>[^>]*)/?>|(?<text>[^<>]++(?!>))";

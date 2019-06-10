@@ -1,6 +1,8 @@
 package lib.browser;
 
 public class Bookmark {
+    private int id;
+    private int idUser;
     private String name;
     private Location location;
 
@@ -8,7 +10,23 @@ public class Bookmark {
         this.name = name;
         this.location = location;
     }
+    
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+    
     public String getName() {
         return name;
     }

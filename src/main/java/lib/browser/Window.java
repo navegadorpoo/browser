@@ -1,18 +1,24 @@
 package lib.browser;
 
 import gui.WindowPanel;
-import javax.swing.JPanel;
-import lib.URLReader;
+import gui.components.interaction.Dialog;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import lib.net.URLReader;
+import lib.database.repositories.BookmarkRepository;
+import lib.database.repositories.HistoryRepository;
 import lib.document.Document;
 import lib.document.element.html.HTMLParser;
 import lib.document.element.html.HTMLRenderer;
+import lib.net.UrlComplete;
 
 public class Window {
-    private String title;
+    private String title = "Sem Título";
     private WindowPanel panel = new WindowPanel();
-    private Document document;
-    private History history = new History();
+    private HistoryList history = new HistoryList();
     private BookmarkList bookmarks = new BookmarkList();
+    private Document document;
     private Location location;
     
     public Window(String title) {
@@ -22,35 +28,78 @@ public class Window {
     }
     
     public void loadHistory() {
-        history.add(new Location("google", "http://www.google.com"));
+        try {
+            HistoryRepository.all().forEach(lc -> history.add(lc));    
+        } catch (SQLException e) {
+            Dialog.showMessage(
+                "error",
+                "Atenção",
+                "Houve um problema ao carregar o histórico de navegação"
+            );
+        }
     }
     
     public void loadBookmarks() {
-        bookmarks.add(new Bookmark("Google", new Location("Google", "http://www.google.com")));
-        bookmarks.add(new Bookmark("Facebook", new Location("Facebook", "http://www.facebook.com")));
-        bookmarks.add(new Bookmark("Google", new Location("Google", "http://www.google.com")));
-        bookmarks.add(new Bookmark("Facebook", new Location("Facebook", "http://www.facebook.com")));
-        bookmarks.add(new Bookmark("Google", new Location("Google", "http://www.google.com")));
-        bookmarks.add(new Bookmark("Facebook", new Location("Facebook", "http://www.facebook.com")));
-        bookmarks.add(new Bookmark("Google", new Location("Google", "http://www.google.com")));
-        bookmarks.add(new Bookmark("Facebook", new Location("Facebook", "http://www.facebook.com")));
-        bookmarks.add(new Bookmark("Google", new Location("Google", "http://www.google.com")));
-        bookmarks.add(new Bookmark("Facebook", new Location("Facebook", "http://www.facebook.com")));
+        try {
+            BookmarkRepository.all().forEach(bm -> bookmarks.add(bm));
+        } catch (SQLException e) {
+            Dialog.showMessage(
+                "error",
+                "Atenção",
+                "Houve um problema ao carregar os favoritos"
+            );
+        }
+
     }
     
     public void open(String url) {
+        try {
+            parse(read(url));
+            setLocation(url);
+            render();
+            register();
+        } catch (IOException e) {
+            Dialog.showMessage(
+                "error",
+                "Atenção",
+                "Não foi possível realizar a leitura, url inválida"
+            );
+        }
+    }
+    
+    private String read(String url) throws IOException {
         URLReader urlReader = new URLReader(url);
-        String html = urlReader.read();
+        return urlReader.read();
+    }
+    
+    private void parse(String html) {
         HTMLParser parser = new HTMLParser();
         parser.parse(html);
         document = parser.getDocument();
-        location = new Location("titulo", url);
-        render();
     }
     
-    public void render() {
+    public void setLocation(String url) {
+        location = new Location(
+            null,
+            UrlComplete.complete(url),
+            LocalDateTime.now()
+        );
+    }
+    
+    private void render() {
         HTMLRenderer renderer = new HTMLRenderer(panel.getPage());
         renderer.render(document);
+    }
+    
+    private void register() {
+        location.setTitle(title);
+        try {
+            history.insert(
+                new History(0, Browser.getInstance().getUser(), location)
+            );
+        } catch (SQLException e) {
+            System.out.println("Erro ao salvar informações no histórico");
+        }
     }
 
     public Document getDocument() {
@@ -61,11 +110,11 @@ public class Window {
         this.document = document;
     }
 
-    public History getHistory() {
+    public HistoryList getHistory() {
         return history;
     }
 
-    public void setHistory(History history) {
+    public void setHistory(HistoryList history) {
         this.history = history;
     }
 
@@ -85,7 +134,7 @@ public class Window {
         this.location = location;
     }
     
-    public JPanel getPanel() {
+    public WindowPanel getPanel() {
         return panel;
     }
 
@@ -95,7 +144,7 @@ public class Window {
 
     public void setTitle(String title) {
         this.title = title;
-        Browser.getInstance().changeActiveTabName(title);
+        Browser.getInstance().changeSelectedTabTitle(title);
     }
     
 }
