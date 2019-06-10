@@ -21,6 +21,10 @@ abstract public class Node implements Renderable {
         children.add(node);
     }
     
+    public int countChildren() {
+        return children.size();
+    }
+    
     public Node getChild(int index) {
         return children.get(index);
     }
@@ -31,8 +35,6 @@ abstract public class Node implements Renderable {
    
     @Override
     public void render(Page page) {
-//        page.add(new JTextArea(this.getClass().toString()));
-//        page.revalidate();
         for (Node child : children) {
             child.render(page);
         }

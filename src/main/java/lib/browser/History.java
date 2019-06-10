@@ -1,17 +1,37 @@
 package lib.browser;
 
-import java.util.Iterator;
-import java.util.LinkedList;
+public class History {
+    private int id;
+    private int idUser;
+    private Location location;
 
-public class History implements Iterable {
-    private LinkedList<Location> locations = new LinkedList<>();
-    
-    public void add(Location location) {
-        locations.add(location);
+    public History(int id, int idUser, Location location) {
+        this.id = id;
+        this.idUser = idUser;
+        this.location = location;
     }
 
-    @Override
-    public Iterator iterator() {
-        return locations.iterator();
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

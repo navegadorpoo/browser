@@ -11,17 +11,18 @@ public class HTMLRenderer {
     }
     
     public void render(Document document) {
-        try {
-            renderHTML((HTMLElement)document.getChild(0));
-        } catch (IndexOutOfBoundsException e) {
-            page.add(new JTextArea("HTML Inválido"));
-            page.revalidate();
-        }
+        page.removeAll();
         
+        if (document.countChildren() == 0) {
+            page.add(new JTextArea("404 Not Found"));
+            page.revalidate();
+            return;
+        }
+
+        renderHTML((HTMLElement)document.getChild(0));
     }
     
     private void renderHTML(HTMLElement element) {
-        page.removeAll();
         element.render(page);
     }
 }

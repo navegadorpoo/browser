@@ -1,5 +1,6 @@
 package lib;
 
+import lib.net.UrlComplete;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 

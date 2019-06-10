@@ -5,11 +5,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
-import lib.browser.Window;
 
 
 public class Menu extends JPanel {
-    Window         window;
     UrlBar         urlBar         = new UrlBar();
     BackButton     backButton     = new BackButton();
     NextButton     nextButton     = new NextButton();
@@ -42,5 +40,9 @@ public class Menu extends JPanel {
         c.weightx = weightx;
         c.gridx = gridx;
         return c;
+    }
+
+    public String getUrlTextContent() {
+        return urlBar.getText();
     }
 }

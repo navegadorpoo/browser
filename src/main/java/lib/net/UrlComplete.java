@@ -1,4 +1,4 @@
-package lib;
+package lib.net;
 
 public class UrlComplete {
     
