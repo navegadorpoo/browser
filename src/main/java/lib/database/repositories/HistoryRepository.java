@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import gui.components.interaction.Dialog;
+import lib.browser.Browser;
 import lib.browser.History;
 import lib.browser.Location;
 import lib.database.Conn;
@@ -21,7 +22,9 @@ public class HistoryRepository {
 
         Connection conn = Conn.getConnection();
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery(String.format("SELECT * FROM `%s`", TABLE_NAME));
+        ResultSet rs = st.executeQuery(String.format(
+            "SELECT * FROM `%s` WHERE `id_user` = %d", TABLE_NAME, Browser.getInstance().getUser().getId())
+        );
 
         while (rs.next()) {
             history.add(new History(rs.getInt("id"), rs.getInt("id_user"), new Location(rs.getString("page_name"),

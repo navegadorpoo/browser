@@ -18,7 +18,7 @@ public class BackButton extends ImageButton {
             public void actionPerformed(ActionEvent evt) {
                 Window window = Browser.getInstance().getWindow();
                 if (window.getPagination().hasBackward()) {
-                    Browser.getInstance().getWindow().back();
+                    window.back();
                 }
             }
         });

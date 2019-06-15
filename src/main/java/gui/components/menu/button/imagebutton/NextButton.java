@@ -19,7 +19,7 @@ public class NextButton extends ImageButton {
             public void actionPerformed(ActionEvent evt) {
                 Window window = Browser.getInstance().getWindow();
                 if (window.getPagination().hasForward()) {
-                    Browser.getInstance().getWindow().next();
+                    window.next();
                 }
             }
         });

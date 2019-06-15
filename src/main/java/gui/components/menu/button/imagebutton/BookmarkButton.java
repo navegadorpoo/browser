@@ -41,7 +41,7 @@ public class BookmarkButton extends ImageButton {
                         window.getBookmarkList().insert(
                             new Bookmark(
                                 0,
-                                browser.getUser(),
+                                browser.getUser().getId(),
                                 name,
                                 browser.getWindow().getPagination().getLocation()
                             )

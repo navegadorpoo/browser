@@ -126,7 +126,7 @@ public class Window {
         pagination.getLocation().setTitle(title);
         try {
             history.insert(
-                new History(0, Browser.getInstance().getUser(), pagination.getLocation())
+                new History(0, Browser.getInstance().getUser().getId(), pagination.getLocation())
             );
         } catch (SQLException e) {
             System.out.println("Erro ao salvar informações no histórico");
