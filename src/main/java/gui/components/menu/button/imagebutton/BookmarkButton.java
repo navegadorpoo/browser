@@ -5,10 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import lib.browser.Bookmark;
-
 import lib.browser.Browser;
 import lib.browser.Location;
-import lib.database.repositories.BookmarkRepository;
+import lib.browser.Window;
 
 public class BookmarkButton extends ImageButton {
     
@@ -20,7 +19,7 @@ public class BookmarkButton extends ImageButton {
     public void setEvents() {
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                Location location = Browser.getInstance().getWindow().getLocation();
+                Location location = Browser.getInstance().getWindow().getPagination().getLocation();
                 
                 if (location == null) {
                     Dialog.showMessage(
@@ -37,10 +36,14 @@ public class BookmarkButton extends ImageButton {
                 
                 if (name != null) {
                     try {
-                        BookmarkRepository.insert(
+                        Browser browser = Browser.getInstance();
+                        Window window = browser.getWindow();
+                        window.getBookmarkList().insert(
                             new Bookmark(
+                                0,
+                                browser.getUser(),
                                 name,
-                                Browser.getInstance().getWindow().getLocation()
+                                browser.getWindow().getPagination().getLocation()
                             )
                         );
                         Dialog.showMessage(

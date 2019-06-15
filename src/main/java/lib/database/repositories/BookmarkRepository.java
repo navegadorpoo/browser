@@ -22,7 +22,7 @@ public class BookmarkRepository {
         ResultSet rs = st.executeQuery(String.format("SELECT * FROM %s", TABLE_NAME));
 
         while (rs.next()) {
-            bookmarks.add(new Bookmark(rs.getString("name"),
+            bookmarks.add(new Bookmark(rs.getInt("id"), rs.getInt("id_user"), rs.getString("name"),
                     new Location(rs.getString("name"), rs.getString("url"), LocalDateTime.now())));
         }
 

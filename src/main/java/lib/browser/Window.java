@@ -18,8 +18,8 @@ public class Window {
     private WindowPanel panel = new WindowPanel();
     private HistoryList history = new HistoryList();
     private BookmarkList bookmarks = new BookmarkList();
+    private Pagination pagination = new Pagination();
     private Document document;
-    private Location location;
     
     public Window(String title) {
         this.title = title;
@@ -54,15 +54,42 @@ public class Window {
     
     public void open(String url) {
         try {
-            parse(read(url));
             setLocation(url);
-            render();
-            register();
+            go(url);
         } catch (IOException e) {
             Dialog.showMessage(
                 "error",
                 "Atenção",
                 "Não foi possível realizar a leitura, url inválida"
+            );
+        }
+    }
+
+    public void go(String url) throws IOException {
+        parse(read(url));
+        revalidate();
+        render();
+        register();
+    }
+
+    public void back() {
+        pagination.backward();
+        reload();
+    }
+
+    public void next() {
+        pagination.forward();
+        reload();
+    }
+
+    public void reload() {
+        try {
+            go(pagination.getLocation().getUrl());
+        } catch (IOException e) {
+            Dialog.showMessage(
+                "error",
+                "Atenção",
+                "Ocorreu um erro ao avançar, por favor recarregue a página"
             );
         }
     }
@@ -79,11 +106,15 @@ public class Window {
     }
     
     public void setLocation(String url) {
-        location = new Location(
+        pagination.current(new Location(
             null,
             UrlComplete.complete(url),
             LocalDateTime.now()
-        );
+        ));
+    }
+
+    private void revalidate() {
+        panel.getMenu().setUrlTextContent(pagination.getLocation().getUrl());
     }
     
     private void render() {
@@ -92,10 +123,10 @@ public class Window {
     }
     
     private void register() {
-        location.setTitle(title);
+        pagination.getLocation().setTitle(title);
         try {
             history.insert(
-                new History(0, Browser.getInstance().getUser(), location)
+                new History(0, Browser.getInstance().getUser(), pagination.getLocation())
             );
         } catch (SQLException e) {
             System.out.println("Erro ao salvar informações no histórico");
@@ -126,12 +157,12 @@ public class Window {
         this.bookmarks = bookmarks;
     }
 
-    public Location getLocation() {
-        return location;
+    public Pagination getPagination() {
+        return pagination;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setPagination(Pagination pagination) {
+        this.pagination = pagination;
     }
     
     public WindowPanel getPanel() {

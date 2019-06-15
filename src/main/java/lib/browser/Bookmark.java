@@ -6,7 +6,9 @@ public class Bookmark {
     private String name;
     private Location location;
 
-    public Bookmark(String name, Location location) {
+    public Bookmark(int id, int idUser, String name, Location location) {
+        this.id = id;
+        this.idUser = idUser;
         this.name = name;
         this.location = location;
     }

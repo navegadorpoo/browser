@@ -13,12 +13,12 @@ public class BookmarkList implements Iterable {
         bookmarks.add(bookmark);
     }
     
-    public void add(String name, Location location ) {
-        bookmarks.add(new Bookmark(name, location));
+    public void add(int id, int idUser, String name, Location location ) {
+        bookmarks.add(new Bookmark(id, idUser, name, location));
     }
     
-    public void add(String name, String title, String href, LocalDateTime datetime) {
-        bookmarks.add(new Bookmark(name, new Location(title, href, datetime)));
+    public void add(int id, int idUser, String name, String title, String href, LocalDateTime datetime) {
+        bookmarks.add(new Bookmark(id, idUser, name, new Location(title, href, datetime)));
     }
     
     public void delete(int id) throws SQLException {
