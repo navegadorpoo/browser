@@ -14,37 +14,28 @@ public class Browser {
     private GraphicInterface graphicInterface;
     private LinkedList<Window> windows;
     private User user;
-    
-    private Browser () {
-        init();
+
+    public static Browser getInstance() {
+        if (instance == null) {
+            instance = new Browser();
+        }
+        return instance;
     }
 
-    private void init() {
-        this.user = User.defaultUser();
-        setUp();
+    public void init(User user) {
+        this.user             = user;
+        this.windows          = new LinkedList<>();
+        this.graphicInterface = new GraphicInterface();
+        open();
     }
 
-    private void init(User user) {
-        this.user = user;
-        setUp();
-    }
-
-    private void setUp() {
-        windows          = new LinkedList<>();
-        graphicInterface = new GraphicInterface();
+    private void open() {
         graphicInterface.setVisible(true);
         addWindow(new Window("Página Inicial"));
     }
 
     private void close() {
         graphicInterface.setVisible(false);
-    }
-    
-    public static Browser getInstance() {
-        if (instance == null) {
-            instance = new Browser();
-        }
-        return instance;
     }
     
     public void changeSelectedTabTitle(String title) {
@@ -82,6 +73,7 @@ public class Browser {
     public static void main(String args[]) {
         setLookAndFeel();
         Browser browser = Browser.getInstance();
+        browser.init(User.defaultUser());
     }
     
     public static void setLookAndFeel() {

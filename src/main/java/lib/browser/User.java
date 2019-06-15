@@ -1,7 +1,7 @@
 package lib.browser;
 
 public class User {
-    private int id;
+    private int    id;
     private String firstName;
     private String lastName;
     private String username;
@@ -9,12 +9,12 @@ public class User {
     private String password;
 
     public User(int id, String firstName, String lastName, String username, String email, String password) {
-        this.id = id;
+        this.id        = id;
         this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.email = email;
-        this.password = password;
+        this.lastName  = lastName;
+        this.username  = username;
+        this.email     = email;
+        this.password  = password;
     }
 
     public static User defaultUser() {
