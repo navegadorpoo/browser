@@ -13,7 +13,7 @@ import lib.browser.Browser;
 public class HTMLImageElement extends HTMLElement {
     @Override
     public void render(Page page) {
-        String urlBase  = Browser.getInstance().getWindow().getLocation().getUrl();
+        String urlBase  = Browser.getInstance().getWindow().getPagination().getLocation().getUrl();
         String urlImage = urlBase + getAttribute("src");
         
         try {

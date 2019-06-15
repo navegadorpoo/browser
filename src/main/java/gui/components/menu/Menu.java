@@ -42,6 +42,10 @@ public class Menu extends JPanel {
         return c;
     }
 
+    public void setUrlTextContent(String url) {
+        urlBar.setText(url);
+    }
+
     public String getUrlTextContent() {
         return urlBar.getText();
     }

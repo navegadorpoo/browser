@@ -20,7 +20,7 @@ public class BookmarkButton extends ImageButton {
     public void setEvents() {
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                Location location = Browser.getInstance().getWindow().getLocation();
+                Location location = Browser.getInstance().getWindow().getPagination().getLocation();
                 
                 if (location == null) {
                     Dialog.showMessage(
@@ -40,7 +40,7 @@ public class BookmarkButton extends ImageButton {
                         BookmarkRepository.insert(
                             new Bookmark(
                                 name,
-                                Browser.getInstance().getWindow().getLocation()
+                                Browser.getInstance().getWindow().getPagination().getLocation()
                             )
                         );
                         Dialog.showMessage(
