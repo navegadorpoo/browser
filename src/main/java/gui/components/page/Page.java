@@ -1,10 +1,11 @@
 package gui.components.page;
 
-import javax.swing.BorderFactory;
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
 public class Page extends JPanel {
     public Page() {
-        setBorder(BorderFactory.createEtchedBorder());
+        setBackground(Color.WHITE);
     }
 }

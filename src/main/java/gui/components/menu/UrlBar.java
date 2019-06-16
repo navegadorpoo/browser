@@ -1,5 +1,6 @@
 package gui.components.menu;
 
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JTextField;
@@ -7,16 +8,12 @@ import lib.browser.Browser;
 
 public class UrlBar extends JTextField {
     public UrlBar() {
+        setPreferredSize(new Dimension(30, 30));
         setEvents();
     }
-    
+
     private void setEvents() {
         addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent evt) {
-                //faz nada
-            }
-            
             @Override
             public void keyPressed(KeyEvent evt) {
                 if (evt.getKeyCode() != 10) {
@@ -26,9 +23,10 @@ public class UrlBar extends JTextField {
             }
 
             @Override
-            public void keyReleased(KeyEvent evt) {
-                //faz nada
-            }
+            public void keyTyped(KeyEvent evt) {}
+
+            @Override
+            public void keyReleased(KeyEvent evt) {}
         });
     }
 }

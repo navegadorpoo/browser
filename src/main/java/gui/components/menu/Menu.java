@@ -3,9 +3,11 @@ package gui.components.menu;
 import gui.components.menu.button.imagebutton.*;
 import gui.components.menu.button.togglebutton.IncognitoButton;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 
@@ -23,6 +25,7 @@ public class Menu extends JPanel {
     SettingsButton  settingsButton  = new SettingsButton();
 
     public Menu() {
+        setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(170, 170, 170)));
         setLayout(new GridBagLayout());
         add(backButton, getGridConstraints(0, 0));
         add(nextButton, getGridConstraints(0, 1));
