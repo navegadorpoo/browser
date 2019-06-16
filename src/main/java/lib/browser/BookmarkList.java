@@ -20,6 +20,10 @@ public class BookmarkList implements Iterable {
     public void add(int id, int idUser, String name, String title, String href, LocalDateTime datetime) {
         bookmarks.add(new Bookmark(id, idUser, name, new Location(title, href, datetime)));
     }
+
+    public int count() {
+        return bookmarks.size();
+    }
     
     public void delete(int id) throws SQLException {
         bookmarks.removeIf(bookmark -> bookmark.getId() == id);
@@ -27,8 +31,9 @@ public class BookmarkList implements Iterable {
     }
     
     public void insert(Bookmark bookmark) throws SQLException {
+        int id = BookmarkRepository.insert(bookmark);
+        bookmark.setId(id);
         add(bookmark);
-        BookmarkRepository.insert(bookmark);
     }
 
     @Override

@@ -11,19 +11,31 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Browser {
     private static Browser instance;
         
-    private GraphicInterface graphicInterface = new GraphicInterface();
-    private LinkedList<Window> windows = new LinkedList<>();
-    private int user = 1;
-    
-    private Browser () {
-        graphicInterface.setVisible(true);
-    }
-    
+    private GraphicInterface graphicInterface;
+    private LinkedList<Window> windows;
+    private User user;
+
     public static Browser getInstance() {
         if (instance == null) {
             instance = new Browser();
         }
         return instance;
+    }
+
+    public void init(User user) {
+        this.user             = user;
+        this.windows          = new LinkedList<>();
+        this.graphicInterface = new GraphicInterface();
+        open();
+    }
+
+    private void open() {
+        graphicInterface.setVisible(true);
+        addWindow(new Window("Página Inicial"));
+    }
+
+    private void close() {
+        graphicInterface.setVisible(false);
     }
     
     public void changeSelectedTabTitle(String title) {
@@ -48,15 +60,29 @@ public class Browser {
             pane.remove(pane.getSelectedComponent());
         }
     }
+
+    public void login(User user) {
+        close();
+        init(user);
+    }
+
+    public void logout() {
+        close();
+        init(User.defaultUser());
+    }
+
+    public boolean isLogged() {
+        return user.getId() != User.defaultUser().getId();
+    }
     
-    public int getUser() {
+    public User getUser() {
         return user;
     }
        
     public static void main(String args[]) {
         setLookAndFeel();
         Browser browser = Browser.getInstance();
-        browser.addWindow(new Window("Página Inicial"));
+        browser.init(User.defaultUser());
     }
     
     public static void setLookAndFeel() {

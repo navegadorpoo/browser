@@ -8,7 +8,7 @@ import lib.browser.Window;
 
 public class BackButton extends ImageButton {
     public BackButton() {
-        super("left_arrow");
+        super("Voltar", "left_arrow");
         setEvents();
     }
 
@@ -18,7 +18,7 @@ public class BackButton extends ImageButton {
             public void actionPerformed(ActionEvent evt) {
                 Window window = Browser.getInstance().getWindow();
                 if (window.getPagination().hasBackward()) {
-                    Browser.getInstance().getWindow().back();
+                    window.back();
                 }
             }
         });

@@ -7,7 +7,7 @@ import javax.swing.table.TableCellRenderer;
 public class DeleteButton extends ImageButton implements TableCellRenderer {
 
     public DeleteButton() {
-        super("trash");
+        super("Apagar registro", "trash");
     }
 
     @Override

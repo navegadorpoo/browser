@@ -10,7 +10,7 @@ import lib.browser.Window;
 public class GoButton extends ImageButton {
     
     public GoButton() {
-        super("go");
+        super("Ir para endereço", "go");
         setEvents();
     }
 

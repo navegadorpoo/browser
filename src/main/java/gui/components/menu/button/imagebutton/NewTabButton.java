@@ -8,7 +8,7 @@ import lib.browser.Window;
 public class NewTabButton extends ImageButton {
     
     public NewTabButton() {
-        super("sum");
+        super("Abrir nova aba", "sum");
         setEvents();
     }
     

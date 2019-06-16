@@ -9,7 +9,7 @@ import lib.browser.Window;
 public class NextButton extends ImageButton {
     
     public NextButton() {
-        super("right_arrow");
+        super("Avançar", "right_arrow");
         setEvents();
     }
 
@@ -19,7 +19,7 @@ public class NextButton extends ImageButton {
             public void actionPerformed(ActionEvent evt) {
                 Window window = Browser.getInstance().getWindow();
                 if (window.getPagination().hasForward()) {
-                    Browser.getInstance().getWindow().next();
+                    window.next();
                 }
             }
         });
