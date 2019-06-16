@@ -2,7 +2,7 @@ package lib.browser;
 
 import java.util.Stack;
 
-public class Pagination {
+public class Navigation {
     private Location current;
     private Stack<Location> backward = new Stack<>();
     private Stack<Location> forward = new Stack<>();

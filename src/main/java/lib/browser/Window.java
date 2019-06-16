@@ -18,18 +18,18 @@ public class Window {
     private WindowPanel panel = new WindowPanel();
     private HistoryList history = new HistoryList();
     private BookmarkList bookmarks = new BookmarkList();
-    private Pagination pagination = new Pagination();
+    private Navigation navigation = new Navigation();
     private Document document;
-    
+
     public Window(String title) {
         this.title = title;
         loadHistory();
         loadBookmarks();
     }
-    
+
     public void loadHistory() {
         try {
-            HistoryRepository.all().forEach(lc -> history.add(lc));    
+            HistoryRepository.all().forEach(lc -> history.add(lc));
         } catch (SQLException e) {
             Dialog.showMessage(
                 "error",
@@ -38,7 +38,7 @@ public class Window {
             );
         }
     }
-    
+
     public void loadBookmarks() {
         try {
             BookmarkRepository.all().forEach(bm -> bookmarks.add(bm));
@@ -51,7 +51,7 @@ public class Window {
         }
 
     }
-    
+
     public void open(String url) {
         try {
             setLocation(url);
@@ -73,18 +73,18 @@ public class Window {
     }
 
     public void back() {
-        pagination.backward();
+        navigation.backward();
         reload();
     }
 
     public void next() {
-        pagination.forward();
+        navigation.forward();
         reload();
     }
 
     public void reload() {
         try {
-            go(pagination.getLocation().getUrl());
+            go(navigation.getLocation().getUrl());
         } catch (IOException e) {
             Dialog.showMessage(
                 "error",
@@ -93,20 +93,20 @@ public class Window {
             );
         }
     }
-    
+
     private String read(String url) throws IOException {
         URLReader urlReader = new URLReader(url);
         return urlReader.read();
     }
-    
+
     private void parse(String html) {
         HTMLParser parser = new HTMLParser();
         parser.parse(html);
         document = parser.getDocument();
     }
-    
+
     public void setLocation(String url) {
-        pagination.current(new Location(
+        navigation.current(new Location(
             null,
             UrlComplete.complete(url),
             LocalDateTime.now()
@@ -114,24 +114,24 @@ public class Window {
     }
 
     private void revalidate() {
-        panel.getMenu().setUrlTextContent(pagination.getLocation().getUrl());
+        panel.getMenu().setUrlTextContent(navigation.getLocation().getUrl());
     }
-    
+
     private void render() {
         HTMLRenderer renderer = new HTMLRenderer(panel.getPage());
         renderer.render(document);
     }
-    
+
     private void register() {
-        pagination.getLocation().setTitle(title);
-        
+        navigation.getLocation().setTitle(title);
+
         if (Browser.getInstance().isIncognito()) {
             return;
         }
 
         try {
             history.insert(
-                new History(0, Browser.getInstance().getUser().getId(), pagination.getLocation())
+                new History(0, Browser.getInstance().getUser().getId(), navigation.getLocation())
             );
         } catch (SQLException e) {
             System.out.println("Erro ao salvar informações no histórico");
@@ -162,14 +162,14 @@ public class Window {
         this.bookmarks = bookmarks;
     }
 
-    public Pagination getPagination() {
-        return pagination;
+    public Navigation getPagination() {
+        return navigation;
     }
 
-    public void setPagination(Pagination pagination) {
-        this.pagination = pagination;
+    public void setPagination(Navigation navigation) {
+        this.navigation = navigation;
     }
-    
+
     public WindowPanel getPanel() {
         return panel;
     }
@@ -182,5 +182,5 @@ public class Window {
         this.title = title;
         Browser.getInstance().changeSelectedTabTitle(title);
     }
-    
+
 }
