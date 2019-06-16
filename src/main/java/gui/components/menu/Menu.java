@@ -1,6 +1,8 @@
 package gui.components.menu;
 
 import gui.components.menu.button.imagebutton.*;
+import gui.components.menu.button.togglebutton.IncognitoButton;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -8,16 +10,17 @@ import javax.swing.JPanel;
 
 
 public class Menu extends JPanel {
-    UrlBar         urlBar         = new UrlBar();
-    BackButton     backButton     = new BackButton();
-    NextButton     nextButton     = new NextButton();
-    ReloadButton   reloadButton   = new ReloadButton();
-    GoButton       goButton       = new GoButton();
-    BookmarkButton bookmarkButton = new BookmarkButton();
-    LoginButton    loginButton    = new LoginButton();
-    NewTabButton   newTabButton   = new NewTabButton();
-    CloseTabButton closeTabButton = new CloseTabButton();
-    SettingsButton settingsButton = new SettingsButton();
+    UrlBar          urlBar          = new UrlBar();
+    BackButton      backButton      = new BackButton();
+    NextButton      nextButton      = new NextButton();
+    ReloadButton    reloadButton    = new ReloadButton();
+    GoButton        goButton        = new GoButton();
+    BookmarkButton  bookmarkButton  = new BookmarkButton();
+    LoginButton     loginButton     = new LoginButton();
+    IncognitoButton incognitoButton = new IncognitoButton();
+    NewTabButton    newTabButton    = new NewTabButton();
+    CloseTabButton  closeTabButton  = new CloseTabButton();
+    SettingsButton  settingsButton  = new SettingsButton();
 
     public Menu() {
         setLayout(new GridBagLayout());
@@ -30,7 +33,8 @@ public class Menu extends JPanel {
         add(goButton, getGridConstraints(0, 6));
         add(bookmarkButton, getGridConstraints(0, 7));
         add(loginButton, getGridConstraints(0, 8));
-        add(settingsButton, getGridConstraints(0, 9));
+        add(incognitoButton, getGridConstraints(0, 9));
+        add(settingsButton, getGridConstraints(0, 10));
     }
     
     private GridBagConstraints getGridConstraints(int weightx, int gridx) {

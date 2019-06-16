@@ -124,6 +124,11 @@ public class Window {
     
     private void register() {
         pagination.getLocation().setTitle(title);
+        
+        if (Browser.getInstance().isIncognito()) {
+            return;
+        }
+
         try {
             history.insert(
                 new History(0, Browser.getInstance().getUser().getId(), pagination.getLocation())

@@ -14,6 +14,7 @@ public class Browser {
     private GraphicInterface graphicInterface;
     private LinkedList<Window> windows;
     private User user;
+    private boolean incognitoMode = false;
 
     public static Browser getInstance() {
         if (instance == null) {
@@ -75,6 +76,14 @@ public class Browser {
         return user.getId() != User.defaultUser().getId();
     }
     
+    public boolean isIncognito() {
+        return incognitoMode;
+    }
+
+    public void toggleIncognito() {
+        incognitoMode = !incognitoMode;
+    }
+
     public User getUser() {
         return user;
     }
