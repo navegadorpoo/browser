@@ -32,11 +32,22 @@ public class BookmarkRepository {
         return bookmarks;
     }
 
-    public static void insert(Bookmark bookmark) throws SQLException {
+    public static int insert(Bookmark bookmark) throws SQLException {
         Connection conn = Conn.getConnection();
         Statement st = conn.createStatement();
-        st.executeUpdate(String.format("INSERT INTO `%s` (`id_user`, `name`, `url`) values (%s, '%s', '%s')",
-                TABLE_NAME, bookmark.getIdUser(), bookmark.getName(), bookmark.getLocation().getUrl()));
+
+        st.executeUpdate(
+            String.format("INSERT INTO `%s` (`id_user`, `name`, `url`) values (%s, '%s', '%s')",
+            TABLE_NAME, bookmark.getIdUser(), bookmark.getName(), bookmark.getLocation().getUrl()),
+            Statement.RETURN_GENERATED_KEYS
+        );
+
+        ResultSet rs = st.getGeneratedKeys();
+        if (!rs.next()) {
+            throw new SQLException("Problemas ao inserir item aos favoritos");
+        }
+
+        return rs.getInt(1);
     }
 
     public static void delete(int id) throws SQLException {

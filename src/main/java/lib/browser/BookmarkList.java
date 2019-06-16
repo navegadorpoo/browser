@@ -31,8 +31,9 @@ public class BookmarkList implements Iterable {
     }
     
     public void insert(Bookmark bookmark) throws SQLException {
+        int id = BookmarkRepository.insert(bookmark);
+        bookmark.setId(id);
         add(bookmark);
-        BookmarkRepository.insert(bookmark);
     }
 
     @Override

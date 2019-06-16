@@ -22,8 +22,9 @@ public class HistoryList implements Iterable {
     }
     
     public void insert(History history) throws SQLException {
+        int id = HistoryRepository.insert(history);
+        history.setId(id);
         add(history);
-        HistoryRepository.insert(history);
     }
 
     @Override
