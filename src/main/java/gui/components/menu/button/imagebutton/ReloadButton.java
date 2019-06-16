@@ -9,7 +9,7 @@ import lib.browser.Browser;
 public class ReloadButton extends ImageButton {
     
     public ReloadButton() {
-        super("reload");
+        super("Recarregar página", "reload");
         setEvents();
     }
 

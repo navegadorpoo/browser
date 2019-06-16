@@ -9,7 +9,7 @@ public class SettingsButton extends ImageButton {
     private SettingsPopupMenu popupMenu = new SettingsPopupMenu();
     
     public SettingsButton() {
-        super("settings");
+        super("Configurações", "settings");
         setEvents();
     }
     

@@ -12,7 +12,7 @@ import lib.browser.Window;
 public class BookmarkButton extends ImageButton {
     
     public BookmarkButton() {
-        super("star");
+        super("Favoritos", "star");
         setEvents();
     }
 

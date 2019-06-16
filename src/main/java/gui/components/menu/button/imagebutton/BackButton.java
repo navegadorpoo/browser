@@ -8,7 +8,7 @@ import lib.browser.Window;
 
 public class BackButton extends ImageButton {
     public BackButton() {
-        super("left_arrow");
+        super("Voltar", "left_arrow");
         setEvents();
     }
 

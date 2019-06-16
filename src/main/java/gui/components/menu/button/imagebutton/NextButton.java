@@ -9,7 +9,7 @@ import lib.browser.Window;
 public class NextButton extends ImageButton {
     
     public NextButton() {
-        super("right_arrow");
+        super("Avançar", "right_arrow");
         setEvents();
     }
 

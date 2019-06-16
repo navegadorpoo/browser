@@ -8,7 +8,7 @@ import gui.components.login.Login;
 public class LoginButton extends ImageButton {
     
     public LoginButton() {
-        super("user");
+        super("Efetuar login", "user");
         setEvents();
     }
 
