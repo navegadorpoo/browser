@@ -14,6 +14,7 @@ public class ReloadButton extends ImageButton {
     }
 
     public void setEvents() {
+        super.setEvents();
         addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent evt) {

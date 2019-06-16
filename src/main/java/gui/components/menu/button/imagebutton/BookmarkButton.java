@@ -17,6 +17,7 @@ public class BookmarkButton extends ImageButton {
     }
 
     public void setEvents() {
+        super.setEvents();
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 Location location = Browser.getInstance().getWindow().getPagination().getLocation();

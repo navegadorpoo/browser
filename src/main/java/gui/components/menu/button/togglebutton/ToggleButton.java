@@ -1,4 +1,4 @@
-package gui.components.menu.button.imagebutton;
+package gui.components.menu.button.togglebutton;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -6,16 +6,21 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import javax.swing.JToggleButton;
 import javax.swing.ToolTipManager;
 
-abstract public class ImageButton extends JButton {
-    public ImageButton(String tooltipText, String iconName) {
-        setIcon(new ImageIcon("src/main/resources/" + iconName + ".png"));
+abstract public class ToggleButton extends JToggleButton {
+    public ToggleButton(String tooltipText, String iconName, boolean active) {
+        setIconName(iconName, active);
         setPreferredSize(new Dimension(40, 30));
         setContentAreaFilled(false);
         setOpaque(true);
         setTooltip(tooltipText);
+    }
+
+    public void setIconName(String iconName, boolean active) {
+        String mode = active ? "-active" : "-inactive";
+        setIcon(new ImageIcon("src/main/resources/" + iconName + mode + ".png"));
     }
 
     public void setTooltip(String tooltipText) {

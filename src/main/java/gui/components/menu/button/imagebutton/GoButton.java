@@ -15,6 +15,7 @@ public class GoButton extends ImageButton {
     }
 
     public void setEvents() {
+        super.setEvents();
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 Window window = Browser.getInstance().getWindow();

@@ -14,6 +14,7 @@ public class SettingsButton extends ImageButton {
     }
     
     public final void setEvents() {
+        super.setEvents();
         JComponent self = this;
         addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
