@@ -65,6 +65,15 @@ public class Browser {
         close();
         init(user);
     }
+
+    public void logout() {
+        close();
+        init(User.defaultUser());
+    }
+
+    public boolean isLogged() {
+        return user.getId() != User.defaultUser().getId();
+    }
     
     public User getUser() {
         return user;

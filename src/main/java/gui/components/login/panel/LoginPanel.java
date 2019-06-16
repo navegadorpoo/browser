@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import gui.components.interaction.Dialog;
@@ -17,7 +18,6 @@ import gui.components.login.input.InputType;
 import lib.browser.Browser;
 import lib.browser.User;
 import lib.database.repositories.UserRepository;
-import lib.util.MD5;
 
 public class LoginPanel extends JPanel {
     Input username = new Input("Usuário", InputType.TEXT);
@@ -44,9 +44,10 @@ public class LoginPanel extends JPanel {
     }
 
     private void setEvents() {
-        login.addActionListener(new ActionListener(){
+        LoginPanel self = this;
+        login.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent arg0) {
+            public void actionPerformed(ActionEvent evt) {
                 try {
                     String login = username.getText();
                     String pass  = password.getText();
@@ -61,12 +62,13 @@ public class LoginPanel extends JPanel {
                         return;
                     }
 
-                    Dialog.showMessage("success", "Atenção", "Login efetuado com sucesso");
                     Browser.getInstance().login(loggedUser);
                 } catch (IllegalArgumentException e) {
                     Dialog.showMessage("info", "Atenção", e.getMessage());
                 } catch (SQLException e) {
-                    System.out.println(e.getMessage());
+                    Dialog.showMessage("error", "Ops", "Ocorreu um problema ao realizar o login. Por favor, tente novamente mais tarde.");
+                } finally {
+                    SwingUtilities.getWindowAncestor(self).setVisible(false);
                 }
             }
         });

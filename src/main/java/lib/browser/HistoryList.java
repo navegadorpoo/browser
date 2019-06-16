@@ -11,6 +11,10 @@ public class HistoryList implements Iterable {
     public void add(History history) {
         historyList.add(history);
     }
+
+    public int count() {
+        return historyList.size();
+    }
     
     public void delete(int id) throws SQLException {
         historyList.removeIf(history -> history.getId() == id);
