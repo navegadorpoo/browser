@@ -63,11 +63,11 @@ public class LoginPanel extends JPanel {
                     }
 
                     Browser.getInstance().login(loggedUser);
+                    SwingUtilities.getWindowAncestor(self).setVisible(false);
                 } catch (IllegalArgumentException e) {
                     Dialog.showMessage("info", "Atenção", e.getMessage());
                 } catch (SQLException e) {
                     Dialog.showMessage("error", "Ops", "Ocorreu um problema ao realizar o login. Por favor, tente novamente mais tarde.");
-                } finally {
                     SwingUtilities.getWindowAncestor(self).setVisible(false);
                 }
             }
